@@ -14,3 +14,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 ReactDOM.render(<AppContainer />, document.getElementById('todoapp'));
+
+TodoActions.addTodo('My first task');
+TodoActions.addTodo('Another task');
+TodoActions.addTodo('Finish this tutorial');
