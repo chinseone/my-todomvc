@@ -1,5 +1,5 @@
 import Immutable from 'Immutable';
-import {ReduceStore} from 'flux/utils';
+import { ReduceStore } from 'flux/utils';
 import TodoActionTypes from './TodoActionTypes';
 import TodoDispatcher from './TodoDispatcher';
 import Counter from './Counter';
@@ -28,6 +28,13 @@ class TodoStore extends ReduceStore {
 					text: action.text,
 					complete: false,
 				}));
+			case TodoActionTypes.DELETE_TODO:
+				return state.delete(action.id);
+			case TodoActionTypes.TOGGLE_TODO:
+				return state.update({
+					action.id,
+					todo => todo.set('complete', !todo.complete),
+				});
 			default:
 				return state;
 		}

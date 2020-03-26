@@ -27,21 +27,21 @@ function Main(props) {
 		<section id="main">
 			<ul id="todo-list">
 				{[...props.todos.values()].reverse().map(todo => (
-					<li key="todo.id">
+					<li key={todo.id}>
 						<div className="view">
 							<input 
 								className="toggle"
 								type="checkbox"
 								checked={todo.complete}
 								onChange={
-									() => {}
+									() => props.onToggleTodo(todo.id)
 								}
 							/>
 							<label>{todo.text}</label>
 							<button
 								className="destroy"
 								onClick={
-									() => {}
+									() => props.onDeleteTodo(todo.id)
 								}
 							/>
 						</div>
@@ -57,13 +57,16 @@ function Footer(props) {
 		return null;
 	}
 
+	const remaining = props.todos.filter(todo => !todo.complete).size;
+	const phrase = remaining.size === 1? 'item left' : 'items left';
+
 	return (
 		<footer id="footer">
 			<span id="todo-count">
 				<strong>
-					{props.todos.size}
+					{remaining}
 				</strong>
-				{' items left'}
+				{ phrase}
 			</span>
 		</footer>
 	);
